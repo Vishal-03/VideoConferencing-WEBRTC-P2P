@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
+import { Loading } from "./Loading";
 
 const URL = "http://localhost:3000";
 
@@ -200,10 +201,36 @@ export const Room = ({
     }, [localVideoRef])
 
     return <div>
-        Hi {name}
-        <video autoPlay width={400} height={400} ref={localVideoRef} />
-        {lobby ? "Waiting to connect you to someone" : null}
-        <video autoPlay width={400} height={400} ref={remoteVideoRef} />
+        <div className="bg-gray-800">   
+            <div className="flex justify-center pt-5">
+                <div className="flex flex-1 items-center justify-center p-5 pb-10">
+                    <video
+                        autoPlay
+                        width="auto"
+                        height="100vh"   
+                        ref={localVideoRef}
+                        style={{ objectFit: 'cover' }}   
+                    />
+                </div>
+                {
+                    
+                    <div className="flex flex-1 items-center justify-center p-5 pb-10">
+                        {
+                            lobby ? <Loading/>  : 
+                            <video
+                                autoPlay
+                                width="auto"
+                                height="100vh"
+                                ref={remoteVideoRef}
+                                style={{ objectFit: 'cover' }}   
+                            />
+                        }
+                        
+                    </div>
+                }
+                
+                </div>
+        </div>
     </div>
 }
 

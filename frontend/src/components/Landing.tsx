@@ -1,12 +1,16 @@
 import { useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import { Room } from "./Room";
+import { Navbar } from "./Navbar";
+import { Loading } from "./Loading";
+import { Signup } from "./Signup";
 
 export const Landing = () => {
     const [name, setName] = useState("");
     const [localAudioTrack, setLocalAudioTrack] = useState<MediaStreamTrack | null>(null);
     const [localVideoTrack, setlocalVideoTrack] = useState<MediaStreamTrack | null>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
+    const navigate = useNavigate();
 
     const [joined, setJoined] = useState(false);
 
@@ -35,16 +39,24 @@ export const Landing = () => {
     }, [videoRef]);
 
     if (!joined) {
-            
     return <div>
-            <video autoPlay ref={videoRef}></video>
-            <input type="text" onChange={(e) => {
-                setName(e.target.value);
-            }}>
-            </input>
-            <button onClick={() => {
-                setJoined(true);
-            }}>Join</button>
+            <div className="bg-slate-950">   
+                <div className="flex justify-center flex-cols-span pt-5">
+                    <div className="flex flex-1 items-center justify-center p-5 pb-10 ">
+                        <video autoPlay ref={videoRef}></video>
+                    </div>
+                    <div className="flex flex-1 items-center justify-center p-2 relative">
+                        <button className="px-12 py-4 rounded-full bg-[#1ED720] font-bold text-white tracking-widest uppercase transform hover:scale-105 hover:bg-blue-600 transition-colors duration-200 mr-2" onClick={() => {
+                            setJoined(true);
+                        }}>Start Room</button>
+                        <div>
+                            <button className="px-12 py-4 rounded-full bg-zinc-600 font-bold text-white tracking-widest uppercase transform hover:scale-105 hover:bg-blue-600 transition-colors duration-200" onClick={() => {
+                                navigate("/signup")
+                            }}>Sign Up</button>
+                        </div>
+                    </div>
+                </div>
+            </div> 
         </div>
     }
 
