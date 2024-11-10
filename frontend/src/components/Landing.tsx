@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import {useNavigate } from "react-router-dom";
 import { Room } from "./Room";
-import { Navbar } from "./Navbar";
-import { Loading } from "./Loading";
-import { Signup } from "./Signup";
 
 export const Landing = () => {
     const [name, setName] = useState("");
@@ -59,6 +56,6 @@ export const Landing = () => {
             </div> 
         </div>
     }
-
+    setName(name);
     return <Room name={name} localAudioTrack={localAudioTrack} localVideoTrack={localVideoTrack} />
 }
